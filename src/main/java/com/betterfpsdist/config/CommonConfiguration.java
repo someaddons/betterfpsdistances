@@ -4,15 +4,16 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class CommonConfiguration
 {
-    public final ForgeConfigSpec                      ForgeConfigSpecBuilder;
-    public final ForgeConfigSpec.ConfigValue<Boolean> printDragonPhases;
+    public final ForgeConfigSpec                     ForgeConfigSpecBuilder;
+    public final ForgeConfigSpec.ConfigValue<Double> stretch;
 
     protected CommonConfiguration(final ForgeConfigSpec.Builder builder)
     {
         builder.push("Config category");
 
-        builder.comment("Prints the dragon phase in chat if enabled: default:false");
-        printDragonPhases = builder.define("printDragonPhases", false);
+        builder.comment("The amount by which the chunk render distance sphere is stretched in horizontal direction."
+                          + " default:false");
+        stretch = builder.defineInRange("stretch", 2.0, 0.5, 10d);
 
         // Escapes the current category level
         builder.pop();

@@ -42,6 +42,7 @@ public class BetterfpsdistMod
     {
         // Side safe client event handler
         Mod.EventBusSubscriber.Bus.FORGE.bus().get().register(ClientEventHandler.class);
+        ;
     }
 
     private void setup(final FMLCommonSetupEvent event)

@@ -1,6 +1,6 @@
 package com.betterfpsdist.config;
 
-import com.betterfpsdist.betterfpsdistMod;
+import com.betterfpsdist.BetterfpsdistMod;
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -26,7 +26,7 @@ public class Configuration
     public Configuration()
     {
         commonConfig = new CommonConfiguration(new ForgeConfigSpec.Builder());
-        loadConfig(commonConfig.ForgeConfigSpecBuilder, FMLPaths.CONFIGDIR.get().resolve(betterfpsdistMod.MODID + "-common.toml"));
+        loadConfig(commonConfig.ForgeConfigSpecBuilder, FMLPaths.CONFIGDIR.get().resolve(BetterfpsdistMod.MODID + "-common.toml"));
     }
 
     public static void loadConfig(ForgeConfigSpec spec, Path path)
