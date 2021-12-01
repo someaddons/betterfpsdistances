@@ -8,9 +8,5 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  */
 public class EventHandler
 {
-    @SubscribeEvent
-    public static void onWorldTick(final TickEvent.WorldTickEvent event)
-    {
 
-    }
 }
