@@ -6,7 +6,7 @@ import net.minecraft.client.Option;
 import net.minecraft.client.ProgressOption;
 import net.minecraft.client.gui.screens.VideoSettingsScreen;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.ScreenOpenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class ClientEventHandler
         }
     }
     @SubscribeEvent
-    public static void on(GuiOpenEvent event)
+    public static void on(ScreenOpenEvent event)
     {
         if (event.isCanceled())
         {

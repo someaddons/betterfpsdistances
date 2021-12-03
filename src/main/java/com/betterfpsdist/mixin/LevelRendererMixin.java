@@ -33,15 +33,14 @@ public class LevelRendererMixin
     public boolean on(final ChunkRenderDispatcher.CompiledChunk instance, final RenderType type)
     {
         boolean returnv =
-          minecraft.cameraEntity != null &&
-            distSqr(minecraft.cameraEntity.position(), new Vec3(current.getOrigin().getX(), current.getOrigin().getY(), current.getOrigin().getZ()))
-              > (Minecraft.getInstance().options.renderDistance * 16) * (Minecraft.getInstance().options.renderDistance * 16)
+          minecraft.cameraEntity != null && distSqr(minecraft.cameraEntity.position(), new Vec3(current.getOrigin().getX(), current.getOrigin().getY(), current.getOrigin().getZ()))
+                                              > (Minecraft.getInstance().options.renderDistance * 16) * (Minecraft.getInstance().options.renderDistance * 16)
             || instance.isEmpty(type);
 
-        /*
+/*
         if (Minecraft.getInstance().player.level.getGameTime() > nextUpdate)
         {
-            nextUpdate = Minecraft.getInstance().player.level.getGameTime() + 20 * 60;
+            nextUpdate = Minecraft.getInstance().player.level.getGameTime() + 20 * 5;
             BetterfpsdistMod.LOGGER.warn("Rendered Sections:" + renderedPositions.size());
             renderedPositions.clear();
         }
