@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "betterfpsdist",
+  "version": "${version}",
+
+  "name": "Better FPS distance Mod",
+  "description": "Grants more fps by smart render distances",
+  "authors": [
+    "Someaddons"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "ARR",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.betterfpsdist.BetterfpsdistMod"
+    ]
+  },
+  "mixins": [
+    "betterfpsdist.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
