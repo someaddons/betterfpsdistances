@@ -3,10 +3,12 @@
   "package": "com.betterfpsdist.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "betterfpsdist-fabric-refmap.json",
+  "plugin": "com.betterfpsdist.mixin.MixinConfig",
   "mixins": [
   ],
   "client": [
     "LevelRendererMixin",
+    "Sodiummixin",
     "VideoOptionsScreenMixin"
   ],
   "injectors": {
