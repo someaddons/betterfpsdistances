@@ -25,7 +25,7 @@ public class MixinConfig implements IMixinConfigPlugin
     @Override
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName)
     {
-        if (targetClassName.equals("net.minecraft.client.renderer.LevelRenderer"))
+        if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin"))
         {
             return FMLLoader.getLoadingModList().getModFileById("magnesium") == null &&
                      FMLLoader.getLoadingModList().getModFileById("sodium") == null;
