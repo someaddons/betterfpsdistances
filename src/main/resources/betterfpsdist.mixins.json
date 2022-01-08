@@ -3,10 +3,12 @@
   "package": "com.betterfpsdist.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "betterfpsdist.refmap.json",
+  "plugin": "com.betterfpsdist.mixin.MixinConfig",
   "mixins": [
   ],
   "client": [
-    "LevelRendererMixin"
+    "LevelRendererMixin",
+    "Sodiummixin"
   ],
   "injectors": {
     "defaultRequire": 1
