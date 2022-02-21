@@ -8,7 +8,7 @@
   ],
   "client": [
     "LevelRendererMixin",
-
+    "Sodiummixin",
     "VideoOptionsScreenMixin"
   ],
   "injectors": {
