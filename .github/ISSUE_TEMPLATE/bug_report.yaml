@@ -3,7 +3,7 @@ description: File a bug report
 title: "[Bug]: "
 labels: ["bug", "triage"]
 assignees:
-  - octocat
+  - someaddons
 body:
   - type: markdown
     attributes:
@@ -20,43 +20,54 @@ body:
   - type: textarea
     id: what-happened
     attributes:
-      label: What happened?
+      label: Describe the bug you're experiencing
       description: Also tell us, what did you expect to happen?
       placeholder: Tell us what you see!
-      value: "A bug happened!"
+      value: ""
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproducability
+      description: Which steps are needed to reproduce this bug?
+      placeholder: Tell us what you see!
+      value: ""
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Mod up to date
+      description:
+      options:
+        - label: Before submitting this issue I updated to the newest version and reproduced it
+          required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Minecraft version
+      description: What version of our Minecraft are you running?
+      options:
+        - 1.16.5
+        - 1.18.1
     validations:
       required: true
   - type: dropdown
     id: version
     attributes:
-      label: Version
-      description: What version of our software are you running?
+      label: Modloader version
+      description: Which modloader are you using? Only Forge/Fabric is supported.
       options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
+        - Forge
+        - Fabric
     validations:
       required: true
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
-  - type: textarea
+  - type: input
     id: logs
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
+      label: Logs
+      description: Please upload your log file from logs/latest.log to https://gist.github.com/ and put in the link below. No matter if you think it is relevant or not.
+      placeholder: ex. https://gist.github.com/someaddons/aa5986b9495863c3b5
+    validations:
+      required: true
