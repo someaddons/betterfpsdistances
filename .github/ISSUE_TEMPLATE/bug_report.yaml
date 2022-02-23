@@ -34,7 +34,7 @@ body:
         - label: Before submitting this issue I updated to the newest version and reproduced it
           required: true
   - type: dropdown
-    id: version
+    id: mversion
     attributes:
       label: Minecraft version
       description: What version of our Minecraft are you running?
@@ -44,7 +44,7 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: version
+    id: lversion
     attributes:
       label: Modloader version
       description: Which modloader are you using? Only Forge/Fabric is supported.
