@@ -14,7 +14,7 @@ body:
     attributes:
       label: Describe the bug you're experiencing
       description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
+      placeholder: I did X and Y happened!
     validations:
       required: true
   - type: textarea
@@ -22,7 +22,7 @@ body:
     attributes:
       label: Reproducability
       description: Which steps are needed to reproduce this bug?
-      placeholder: Tell us what you see!
+      placeholder: First do X then Y and then Z happens
     validations:
       required: true
   - type: checkboxes
