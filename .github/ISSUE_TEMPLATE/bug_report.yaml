@@ -57,7 +57,7 @@ body:
     id: logs
     attributes:
       label: Logs
-      description: Please upload your log file from logs/latest.log to https://gist.github.com/ and put in the link below. No matter if you think it is relevant or not.
+      description: Please upload your log file from logs/latest.log to https://gist.github.com/ and put in the link below. It may contain important information.
       placeholder: ex. https://gist.github.com/someaddons/aa5986b9495863c3b5
     validations:
       required: true
