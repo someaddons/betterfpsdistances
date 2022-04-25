@@ -39,7 +39,7 @@ public class Configuration
 
         if (!config.exists())
         {
-            BetterfpsdistMod.LOGGER.warn("Config for dynamic view not found, recreating default");
+            BetterfpsdistMod.LOGGER.warn("Config for betterfps distances not found, recreating default");
             save();
         }
         else

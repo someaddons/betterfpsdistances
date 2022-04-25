@@ -12,7 +12,7 @@ public class CommonConfiguration
         final JsonObject root = new JsonObject();
 
         final JsonObject entry = new JsonObject();
-        entry.addProperty("desc:", "The amount by which the chunk render distance sphere is stretched in horizontal direction."
+        entry.addProperty("desc:", "The amount by which the chunk render distance sphere is stretched in Y direction."
                                      + " default:2.0, min 0.5, max 10");
         entry.addProperty("stretch", stretch);
         root.add("stretch", entry);
