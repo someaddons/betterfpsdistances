@@ -25,7 +25,7 @@ public class MixinConfig implements IMixinConfigPlugin
     @Override
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName)
     {
-        if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin"))
+        if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin") || mixinClassName.contains("VideoOptionsScreenMixin"))
         {
             return !FabricLoader.getInstance().isModLoaded("magnesium") &&
                      !FabricLoader.getInstance().isModLoaded("sodium");

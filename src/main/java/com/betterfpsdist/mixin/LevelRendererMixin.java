@@ -35,7 +35,7 @@ public class LevelRendererMixin
         boolean returnv =
           client.cameraEntity != null
             && distSqr(client.cameraEntity.getPos(), new Vec3d(current.getOrigin().getX(), current.getOrigin().getY(), current.getOrigin().getZ()))
-                 > (client.options.viewDistance * 16) * (client.options.viewDistance * 16)
+                 > (client.options.getViewDistance().getValue() * 16) * (client.options.getViewDistance().getValue() * 16)
             || instance.isEmpty(layer);
 
 /*

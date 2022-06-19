@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Better FPS distance Mod",
-  "description": "Grants more fps by smart render distances",
+  "description": "Grants more fps by smarter render distances",
   "authors": [
     "Someaddons"
   ],
@@ -29,7 +29,7 @@
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": "1.18.x",
+    "minecraft": "1.19.x",
     "java": ">=17"
   },
   "suggests": {

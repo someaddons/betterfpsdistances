@@ -33,8 +33,9 @@ public class Sodiummixin
     private void isWithinRenderDistance(final RenderSection render, final Direction flow, final CallbackInfo ci)
     {
         iterationQueue.add(render, flow);
-        if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ) > (MinecraftClient.getInstance().options.viewDistance * 16) * (
-          MinecraftClient.getInstance().options.viewDistance * 16))
+        if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ)
+              > (MinecraftClient.getInstance().options.getViewDistance().getValue() * 16) * (
+          MinecraftClient.getInstance().options.getViewDistance().getValue() * 16))
         {
             ci.cancel();
         }
