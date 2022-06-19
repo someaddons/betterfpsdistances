@@ -34,7 +34,7 @@ public class LevelRendererMixin
     {
         boolean returnv =
           minecraft.cameraEntity != null && distSqr(minecraft.cameraEntity.position(), new Vec3(current.getOrigin().getX(), current.getOrigin().getY(), current.getOrigin().getZ()))
-                                              > (Minecraft.getInstance().options.renderDistance * 16) * (Minecraft.getInstance().options.renderDistance * 16)
+                                              > (Minecraft.getInstance().options.renderDistance().get() * 16) * (Minecraft.getInstance().options.renderDistance().get() * 16)
             || instance.isEmpty(type);
 
 /*

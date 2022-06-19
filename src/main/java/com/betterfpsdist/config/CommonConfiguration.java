@@ -12,8 +12,8 @@ public class CommonConfiguration
         builder.push("Config category");
 
         builder.comment("The amount by which the chunk render distance sphere is stretched in horizontal direction."
-                          + " default:false");
-        stretch = builder.defineInRange("stretch", 2.0, 0.5, 10d);
+                          + " default:3");
+        stretch = builder.defineInRange("stretch", 3.0, 0.5, 10d);
 
         // Escapes the current category level
         builder.pop();

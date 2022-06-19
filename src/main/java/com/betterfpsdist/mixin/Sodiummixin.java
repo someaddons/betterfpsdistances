@@ -28,8 +28,8 @@ public class Sodiummixin
     @Inject(method = "addVisible", at = @At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/graph/ChunkGraphIterationQueue;add(Lme/jellysquid/mods/sodium/client/render/chunk/RenderSection;Lnet/minecraft/core/Direction;)V", remap = false, shift = AFTER), remap = false, cancellable = true)
     private void isWithinRenderDistance(final RenderSection render, final Direction flow, final CallbackInfo ci)
     {
-        if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ) > (Minecraft.getInstance().options.renderDistance * 16) * (
-          Minecraft.getInstance().options.renderDistance * 16))
+        if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ) > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
+          Minecraft.getInstance().options.renderDistance().get() * 16))
         {
             ci.cancel();
         }

@@ -2,47 +2,28 @@ package com.betterfpsdist.event;
 
 import com.betterfpsdist.BetterfpsdistMod;
 import com.betterfpsdist.config.ConfigurationCache;
-import net.minecraft.client.Option;
-import net.minecraft.client.ProgressOption;
-import net.minecraft.client.gui.screens.VideoSettingsScreen;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraftforge.client.event.ScreenOpenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.mojang.serialization.Codec;
+import net.minecraft.client.OptionInstance;
+import net.minecraft.network.chat.Component;
 
 public class ClientEventHandler
 {
-    public static final ProgressOption RenderSizeStretch = new ProgressOption("options.renderDistance", 0.5D, 10.0D, 0.25F, (value) -> {
-        return ConfigurationCache.stretch;
-    }, (setting, value) -> {
-        ConfigurationCache.stretch = value;
-        BetterfpsdistMod.config.getCommonConfig().stretch.set(value);
-    }, (settings, value) -> {
-        return new TextComponent("HRdistStretch:" + ConfigurationCache.stretch);
-    });
-    static
+    public static final OptionInstance<Double> chunkrenderdist =
+      new OptionInstance<>("options.circularrenderdist",
+        OptionInstance.noTooltip(),
+        ClientEventHandler::percentValueLabel,
+        (new OptionInstance.IntRange(2, 40)).xmap((value) ->
+        {
+            return (double) value / 4.0D;
+        }, (value) -> {
+            return (int) (value * 4.0D);
+        }), Codec.doubleRange(0.5D, 5.0D), 1.0D, (value) -> {
+          ConfigurationCache.stretch = value;
+          BetterfpsdistMod.config.getCommonConfig().stretch.set(value);
+      });
+
+    private static Component percentValueLabel(Component p_231898_, double p_231899_)
     {
-        try
-        {
-            final List<Option> options = new ArrayList<>(Arrays.asList(VideoSettingsScreen.OPTIONS));
-            options.add(options.indexOf(Option.GUI_SCALE) + 1, RenderSizeStretch);
-            VideoSettingsScreen.OPTIONS = options.toArray(new Option[0]);
-        }
-        catch (Throwable e)
-        {
-            BetterfpsdistMod.LOGGER.error("Error trying to add an option Button to video settings, likely optifine is present which removes vanilla functionality required."
-                                            + " The mod still works, but you'll need to manually adjust the config to get different Render distance stretch values as the button could not be added.");
-        }
-    }
-    @SubscribeEvent
-    public static void on(ScreenOpenEvent event)
-    {
-        if (event.isCanceled())
-        {
-            return;
-        }
+        return Component.translatable("options.percent_value", p_231898_, (int) (p_231899_ * 100.0D));
     }
 }
