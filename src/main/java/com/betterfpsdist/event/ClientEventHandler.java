@@ -8,7 +8,7 @@ import net.minecraft.text.Text;
 public class ClientEventHandler
 {
     public static final SimpleOption<Double> chunkrenderdist =
-      new SimpleOption<>("options.circularrenderdist",
+      new SimpleOption<>("Render Distance y-stretch",
         SimpleOption.emptyTooltip(),
         ClientEventHandler::percentValueLabel,
         (new SimpleOption.ValidatingIntSliderCallbacks(2, 40)).withModifier((value) ->
