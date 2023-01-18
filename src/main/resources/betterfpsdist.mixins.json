@@ -9,8 +9,7 @@
     "LevelRendererMixin",
     "Sodiummixin",
     "VideoOptionsScreenMixin",
-    "SodiumGameOptionPagesMixin",
-    "SodiumRenderManagerMixin"
+    "SodiumGameOptionPagesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
