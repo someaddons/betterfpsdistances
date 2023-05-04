@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(SodiumGameOptionPages.class)
 public class SodiumGameOptionPagesMixin
 {
-    @Shadow
+    @Shadow(remap = false)
     @Final
     private static MinecraftOptionsStorage vanillaOpts;
 
@@ -30,7 +30,10 @@ public class SodiumGameOptionPagesMixin
           .setTooltip(Text.literal("Reduces the distance at which chunks beneath/above are shown"))
           .setControl(option -> new SliderControl(option, 50, 500, 1, ControlValueFormatter.percentage()))
           .setBinding(
-            (options, value) -> BetterfpsdistMod.config.getCommonConfig().stretch = value / 100d,
+            (options, value) -> {
+                BetterfpsdistMod.config.getCommonConfig().stretch = value / 100d;
+                BetterfpsdistMod.config.save();
+            },
             options -> (int) BetterfpsdistMod.config.getCommonConfig().stretch * 100
           )
           .setImpact(OptionImpact.LOW)
