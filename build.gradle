@@ -96,7 +96,7 @@ mixin {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}" //21
-    compileOnly("curse.maven:rubidium-574856:3973894")
+    compileOnly("curse.maven:rubidium-574856:4167344")
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 
