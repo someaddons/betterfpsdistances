@@ -5,7 +5,7 @@ buildscript {
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
@@ -96,7 +96,7 @@ mixin {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}" //21
-    compileOnly("curse.maven:rubidium-574856:4448053")
+    compileOnly("curse.maven:rubidium-574856:4573226")
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 
