@@ -6,7 +6,7 @@ import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlValueFormatter;
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.MinecraftOptionsStorage;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,8 +26,8 @@ public class SodiumGameOptionPagesMixin
         instance.add(optionparam);
 
         instance.add(OptionImpl.createBuilder(Integer.TYPE, vanillaOpts)
-          .setName(Text.literal("Render Distance y-stretch"))
-          .setTooltip(Text.literal("Reduces the distance at which chunks beneath/above are shown"))
+          .setName(Component.literal("Render Distance y-stretch"))
+          .setTooltip(Component.literal("Reduces the distance at which chunks beneath/above are shown"))
           .setControl(option -> new SliderControl(option, 50, 500, 1, ControlValueFormatter.percentage()))
           .setBinding(
             (options, value) -> {

@@ -38,10 +38,10 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modCompileOnly("me.jellysquid.mods:sodium-fabric-mc1.19.4:0.4.10+build.24 (1)")
+    modCompileOnly("me.jellysquid.mods:sodium-fabric-mc1.20-0.4.10+build.27")
 }
 
 loom {

@@ -2,16 +2,16 @@ package com.betterfpsdist.event;
 
 import com.betterfpsdist.BetterfpsdistMod;
 import com.mojang.serialization.Codec;
-import net.minecraft.client.option.SimpleOption;
-import net.minecraft.text.Text;
+import net.minecraft.client.OptionInstance;
+import net.minecraft.network.chat.Component;
 
 public class ClientEventHandler
 {
-    public static final SimpleOption<Double> chunkrenderdist =
-      new SimpleOption<>("Render Distance y-stretch",
-        SimpleOption.emptyTooltip(),
+    public static final OptionInstance<Double> chunkrenderdist =
+      new OptionInstance<>("options.circularrenderdist",
+        OptionInstance.noTooltip(),
         ClientEventHandler::percentValueLabel,
-        (new SimpleOption.ValidatingIntSliderCallbacks(2, 40)).withModifier((value) ->
+        (new OptionInstance.IntRange(2, 40)).xmap((value) ->
         {
             return (double) value / 4.0D;
         }, (value) -> {
@@ -21,8 +21,8 @@ public class ClientEventHandler
           BetterfpsdistMod.config.save();
       });
 
-    private static Text percentValueLabel(Text p_231898_, double p_231899_)
+    private static Component percentValueLabel(Component p_231898_, double p_231899_)
     {
-        return Text.translatable("options.percent_value", p_231898_, (int) (p_231899_ * 100.0D));
+        return Component.translatable("options.percent_value", p_231898_, (int) (p_231899_ * 100.0D));
     }
 }
