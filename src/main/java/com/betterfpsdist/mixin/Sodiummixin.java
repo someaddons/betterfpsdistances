@@ -13,8 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static org.spongepowered.asm.mixin.injection.At.Shift.AFTER;
-
 @Mixin(RenderSectionManager.class)
 public class Sodiummixin
 {
@@ -27,10 +25,16 @@ public class Sodiummixin
     @Shadow(remap = false)
     private float cameraZ;
 
-    @Inject(method = "addVisible", at = @At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/graph/ChunkGraphIterationQueue;add(Lme/jellysquid/mods/sodium/client/render/chunk/RenderSection;Lnet/minecraft/core/Direction;)V", remap = false, shift = AFTER), remap = false, cancellable = true)
+    @Shadow(remap = false)
+    @Final
+    private ChunkGraphIterationQueue iterationQueue;
+
+    @Inject(method = "addVisible", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private void isWithinRenderDistance(final RenderSection render, final Direction flow, final CallbackInfo ci)
     {
-        if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ) > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
+        iterationQueue.add(render, flow);
+        if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ)
+              > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
           Minecraft.getInstance().options.renderDistance().get() * 16))
         {
             ci.cancel();
