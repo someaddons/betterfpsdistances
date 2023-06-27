@@ -4,6 +4,7 @@ import com.betterfpsdist.BetterfpsdistMod;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager;
 import me.jellysquid.mods.sodium.client.render.chunk.graph.ChunkGraphIterationQueue;
+import me.jellysquid.mods.sodium.client.render.chunk.lists.ChunkRenderListBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
 import org.spongepowered.asm.mixin.Final;
@@ -30,7 +31,11 @@ public class Sodiummixin
     private ChunkGraphIterationQueue iterationQueue;
 
     @Inject(method = "addVisible", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    private void isWithinRenderDistance(final RenderSection render, final Direction flow, final CallbackInfo ci)
+    private void isWithinRenderDistance(
+      final ChunkRenderListBuilder list,
+      final RenderSection render,
+      final Direction flow,
+      final CallbackInfo ci)
     {
         iterationQueue.add(render, flow);
         if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ)
