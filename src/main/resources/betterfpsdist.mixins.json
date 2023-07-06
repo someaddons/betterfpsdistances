@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "betterfpsdist.refmap.json",
   "plugin": "com.betterfpsdist.mixin.MixinConfig",
+  "mixinPriority": 200,
   "mixins": [
   ],
   "client": [

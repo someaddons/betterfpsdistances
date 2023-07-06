@@ -9,6 +9,7 @@ import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
@@ -17,7 +18,9 @@ public class LevelRendererMixin
 {
     @Shadow
     @Final
-    private Minecraft                         minecraft;
+    private Minecraft minecraft;
+
+    @Unique
     private ChunkRenderDispatcher.RenderChunk current = null;
     //private HashSet<BlockPos>                 renderedPositions = new HashSet<>();
     //private long                              nextUpdate        = 0;
@@ -53,6 +56,7 @@ public class LevelRendererMixin
         return returnv;
     }
 
+    @Unique
     private double distSqr(Vec3 from, Vec3 to)
     {
         double d0 = from.x - to.x;
