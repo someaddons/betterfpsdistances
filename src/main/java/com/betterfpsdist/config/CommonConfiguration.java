@@ -1,9 +1,10 @@
 package com.betterfpsdist.config;
 
 import com.betterfpsdist.BetterfpsdistMod;
+import com.cupboard.config.ICommonConfig;
 import com.google.gson.JsonObject;
 
-public class CommonConfiguration
+public class CommonConfiguration implements ICommonConfig
 {
     public double stretch = 2.0;
 

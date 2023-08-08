@@ -3,6 +3,7 @@ package com.betterfpsdist.mixin;
 import com.betterfpsdist.BetterfpsdistMod;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager;
+import me.jellysquid.mods.sodium.client.render.viewport.Viewport;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Final;
@@ -22,8 +23,11 @@ public class SodiumRenderManagerMixin
     @Final
     private int renderDistance;
 
-    @Inject(method = "isWithinRenderDistance", at = @At("HEAD"), cancellable = true, require = 0, remap = false)
-    private void adjustDist(final RenderSection adj, final CallbackInfoReturnable<Boolean> cir)
+    @Inject(method = "isOutsideViewport", at = @At("HEAD"), cancellable = true, require = 0, remap = false)
+    private void adjustDist(
+      final RenderSection section,
+      final Viewport viewport,
+      final CallbackInfoReturnable<Boolean> cir)
     {
         if (Minecraft.getInstance().player == null)
         {
@@ -31,10 +35,10 @@ public class SodiumRenderManagerMixin
         }
 
         final BlockPos pos = Minecraft.getInstance().player.blockPosition();
-        int xDiff = adj.getChunkX() - (pos.getX() >> 4);
-        int yDiff = adj.getChunkY() - (pos.getY() >> 4);
-        int zDiff = adj.getChunkZ() - (pos.getZ() >> 4);
+        int xDiff = section.getChunkX() - (pos.getX() >> 4);
+        int yDiff = section.getChunkY() - (pos.getY() >> 4);
+        int zDiff = section.getChunkZ() - (pos.getZ() >> 4);
         cir.setReturnValue(xDiff * xDiff + BetterfpsdistMod.config.getCommonConfig().stretch * (yDiff * yDiff) + zDiff * zDiff
-                             < renderDistance * renderDistance);
+                             > renderDistance * renderDistance);
     }
 }
