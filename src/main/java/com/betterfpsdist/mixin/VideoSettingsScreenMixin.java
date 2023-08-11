@@ -1,7 +1,6 @@
 package com.betterfpsdist.mixin;
 
 import com.betterfpsdist.event.ClientEventHandler;
-import net.minecraft.client.OptionInstance;
 import net.minecraft.client.gui.components.OptionsList;
 import net.minecraft.client.gui.screens.VideoSettingsScreen;
 import org.spongepowered.asm.mixin.Mixin;
