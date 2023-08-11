@@ -29,9 +29,9 @@ displayName="betterfpsdist mod" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
-credits="Thanks for this example mod goes to Java" #optional
+credits="" #optional
 # A text field displayed in the mod UI
-authors="Love, Cheese and small house plants" #optional
+authors="Someaddon" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 betterfpsdist mod
@@ -54,5 +54,12 @@ betterfpsdist mod
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
     versionRange="[1.19,1.20)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.betterfpsdist]]
+    modId="cupboard"
+    mandatory=true
+# This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="[1.5,)"
     ordering="NONE"
     side="BOTH"

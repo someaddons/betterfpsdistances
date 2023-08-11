@@ -1,6 +1,6 @@
 package com.betterfpsdist.mixin;
 
-import com.betterfpsdist.config.ConfigurationCache;
+import com.betterfpsdist.BetterfpsdistMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -62,6 +62,6 @@ public class LevelRendererMixin
         double d0 = from.x - to.x;
         double d1 = from.y - to.y;
         double d2 = from.z - to.z;
-        return d0 * d0 + ConfigurationCache.stretch * (d1 * d1) + d2 * d2;
+        return d0 * d0 + BetterfpsdistMod.config.getCommonConfig().stretch * (d1 * d1) + d2 * d2;
     }
 }

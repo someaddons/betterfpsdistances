@@ -1,22 +1,41 @@
 package com.betterfpsdist.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import com.betterfpsdist.BetterfpsdistMod;
+import com.cupboard.config.ICommonConfig;
+import com.google.gson.JsonObject;
 
-public class CommonConfiguration
+public class CommonConfiguration implements ICommonConfig
 {
-    public final ForgeConfigSpec                     ForgeConfigSpecBuilder;
-    public final ForgeConfigSpec.ConfigValue<Double> stretch;
+    public double stretch = 2.0;
 
-    protected CommonConfiguration(final ForgeConfigSpec.Builder builder)
+    public JsonObject serialize()
     {
-        builder.push("Config category");
+        final JsonObject root = new JsonObject();
 
-        builder.comment("The amount by which the chunk render distance sphere is stretched in horizontal direction."
-                          + " default:3");
-        stretch = builder.defineInRange("stretch", 3.0, 0.5, 10d);
+        final JsonObject entry = new JsonObject();
+        entry.addProperty("desc:", "The amount by which the chunk render distance sphere is stretched in Y direction."
+                                     + " default:2.0, min 0.5, max 10");
+        entry.addProperty("stretch", stretch);
+        root.add("stretch", entry);
 
-        // Escapes the current category level
-        builder.pop();
-        ForgeConfigSpecBuilder = builder.build();
+        return root;
+    }
+
+    public void deserialize(JsonObject data)
+    {
+        if (data == null)
+        {
+            BetterfpsdistMod.LOGGER.error("Config file was empty!");
+            return;
+        }
+
+        try
+        {
+            stretch = data.get("stretch").getAsJsonObject().get("stretch").getAsDouble();
+        }
+        catch (Exception e)
+        {
+            BetterfpsdistMod.LOGGER.error("Could not parse config file", e);
+        }
     }
 }

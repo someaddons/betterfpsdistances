@@ -1,6 +1,6 @@
 package com.betterfpsdist.mixin;
 
-import com.betterfpsdist.config.ConfigurationCache;
+import com.betterfpsdist.BetterfpsdistMod;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager;
 import net.minecraft.client.Minecraft;
@@ -42,6 +42,6 @@ public class Sodiummixin
         double d0 = fromX - toX;
         double d1 = fromY - toY;
         double d2 = fromZ - toZ;
-        return d0 * d0 + ConfigurationCache.stretch * (d1 * d1) + d2 * d2;
+        return d0 * d0 + BetterfpsdistMod.config.getCommonConfig().stretch * (d1 * d1) + d2 * d2;
     }
 }

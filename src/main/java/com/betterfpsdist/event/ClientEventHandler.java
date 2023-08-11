@@ -1,7 +1,6 @@
 package com.betterfpsdist.event;
 
 import com.betterfpsdist.BetterfpsdistMod;
-import com.betterfpsdist.config.ConfigurationCache;
 import com.mojang.serialization.Codec;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.network.chat.Component;
@@ -18,8 +17,8 @@ public class ClientEventHandler
         }, (value) -> {
             return (int) (value * 4.0D);
         }), Codec.doubleRange(0.5D, 5.0D), 1.0D, (value) -> {
-          ConfigurationCache.stretch = value;
-          BetterfpsdistMod.config.getCommonConfig().stretch.set(value);
+          BetterfpsdistMod.config.getCommonConfig().stretch = value;
+          BetterfpsdistMod.config.save();
       });
 
     private static Component percentValueLabel(Component p_231898_, double p_231899_)

@@ -30,8 +30,11 @@ public class SodiumGameOptionPagesMixin
           .setTooltip(Component.literal("Reduces the distance at which chunks beneath/above are shown"))
           .setControl(option -> new SliderControl(option, 50, 500, 1, ControlValueFormatter.percentage()))
           .setBinding(
-            (options, value) -> BetterfpsdistMod.config.getCommonConfig().stretch.set(value / 100d),
-            options -> (int) (BetterfpsdistMod.config.getCommonConfig().stretch.get() * 100)
+            (options, value) -> {
+                BetterfpsdistMod.config.getCommonConfig().stretch = value / 100d;
+                BetterfpsdistMod.config.save();
+            },
+            options -> (int) (BetterfpsdistMod.config.getCommonConfig().stretch * 100)
           )
           .setImpact(OptionImpact.LOW)
           .setFlags(new OptionFlag[] {OptionFlag.REQUIRES_RENDERER_RELOAD})
