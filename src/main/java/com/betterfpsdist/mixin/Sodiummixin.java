@@ -2,23 +2,21 @@ package com.betterfpsdist.mixin;
 
 import com.betterfpsdist.BetterfpsdistMod;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
-import me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager;
-import me.jellysquid.mods.sodium.client.render.chunk.lists.SortedRenderListBuilder;
+import me.jellysquid.mods.sodium.client.render.chunk.occlusion.OcclusionCuller;
+import me.jellysquid.mods.sodium.client.render.viewport.CameraTransform;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(RenderSectionManager.class)
+@Mixin(OcclusionCuller.class)
 public class Sodiummixin
 {
-    @Inject(method = "addToRenderLists", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    private void isWithinRenderDistance(
-      final SortedRenderListBuilder renderListBuilder,
-      final RenderSection section,
-      final CallbackInfo ci)
+    @Inject(method = "isOutsideRenderDistance", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    private static void isWithinRenderDistance(
+      final CameraTransform camera, final RenderSection section, final int maxDistance, final CallbackInfoReturnable<Boolean> cir)
     {
         if (Minecraft.getInstance().player != null)
         {
@@ -31,13 +29,13 @@ public class Sodiummixin
                   > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
               Minecraft.getInstance().options.renderDistance().get() * 16))
             {
-                ci.cancel();
+                cir.setReturnValue(true);
             }
         }
     }
 
     @Unique
-    private double distSqr(float fromX, float fromY, float fromZ, double toX, double toY, double toZ)
+    private static double distSqr(float fromX, float fromY, float fromZ, double toX, double toY, double toZ)
     {
         double d0 = fromX - toX;
         double d1 = fromY - toY;
