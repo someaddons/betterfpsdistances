@@ -23,11 +23,9 @@ public class SodiumRenderManagerMixin
     @Final
     private int renderDistance;
 
-    @Inject(method = "isOutsideViewport", at = @At("HEAD"), cancellable = true, require = 0, remap = false)
+    @Inject(method = "isSectionVisible", at = @At("HEAD"), cancellable = true, require = 0, remap = false)
     private void adjustDist(
-      final RenderSection section,
-      final Viewport viewport,
-      final CallbackInfoReturnable<Boolean> cir)
+      final int x, final int y, final int z, final CallbackInfoReturnable<Boolean> cir)
     {
         if (Minecraft.getInstance().player == null)
         {
@@ -35,9 +33,9 @@ public class SodiumRenderManagerMixin
         }
 
         final BlockPos pos = Minecraft.getInstance().player.blockPosition();
-        int xDiff = section.getChunkX() - (pos.getX() >> 4);
-        int yDiff = section.getChunkY() - (pos.getY() >> 4);
-        int zDiff = section.getChunkZ() - (pos.getZ() >> 4);
+        int xDiff = x- (pos.getX() >> 4);
+        int yDiff = y - (pos.getY() >> 4);
+        int zDiff = z - (pos.getZ() >> 4);
         cir.setReturnValue(xDiff * xDiff + BetterfpsdistMod.config.getCommonConfig().stretch * (yDiff * yDiff) + zDiff * zDiff
                              > renderDistance * renderDistance);
     }

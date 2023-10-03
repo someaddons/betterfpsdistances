@@ -16,7 +16,9 @@ public class Sodiummixin
 {
     @Inject(method = "isOutsideRenderDistance", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void isWithinRenderDistance(
-      final CameraTransform camera, final RenderSection section, final int maxDistance, final CallbackInfoReturnable<Boolean> cir)
+      final CameraTransform camera,
+      final RenderSection section,
+      final float maxDistance, final CallbackInfoReturnable<Boolean> cir)
     {
         if (Minecraft.getInstance().player != null)
         {
