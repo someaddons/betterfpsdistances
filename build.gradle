@@ -100,9 +100,10 @@ mixin {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}" //21
-    compileOnly("curse.maven:rubidium-574856:4448053")
+    //compileOnly("curse.maven:rubidium-574856:4448053")
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     implementation fg.deobf("curse.maven:cupboard-326652:4669193")
+    implementation fg.deobf("curse.maven:embeddium-908741:4800667")
 }
 
 jar {
