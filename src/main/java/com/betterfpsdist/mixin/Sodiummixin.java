@@ -2,40 +2,42 @@ package com.betterfpsdist.mixin;
 
 import com.betterfpsdist.BetterfpsdistMod;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
-import me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager;
+import me.jellysquid.mods.sodium.client.render.chunk.occlusion.OcclusionCuller;
+import me.jellysquid.mods.sodium.client.render.viewport.CameraTransform;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.Direction;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static org.spongepowered.asm.mixin.injection.At.Shift.AFTER;
-
-@Mixin(RenderSectionManager.class)
+@Mixin(OcclusionCuller.class)
 public class Sodiummixin
 {
-    @Shadow(remap = false)
-    private float cameraX;
-
-    @Shadow(remap = false)
-    private float cameraY;
-
-    @Shadow(remap = false)
-    private float cameraZ;
-
-    @Inject(method = "addVisible", at = @At(value = "INVOKE", target = "Lme/jellysquid/mods/sodium/client/render/chunk/graph/ChunkGraphIterationQueue;add(Lme/jellysquid/mods/sodium/client/render/chunk/RenderSection;Lnet/minecraft/core/Direction;)V", remap = false, shift = AFTER), remap = false, cancellable = true)
-    private void isWithinRenderDistance(final RenderSection render, final Direction flow, final CallbackInfo ci)
+    @Inject(method = "isOutsideRenderDistance", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    private static void isWithinRenderDistance(
+      final CameraTransform camera,
+      final RenderSection section,
+      final float maxDistance, final CallbackInfoReturnable<Boolean> cir)
     {
-        if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ) > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
-          Minecraft.getInstance().options.renderDistance().get() * 16))
+        if (Minecraft.getInstance().player != null)
         {
-            ci.cancel();
+            if (distSqr(section.getOriginX(),
+              section.getOriginY(),
+              section.getOriginZ(),
+              Minecraft.getInstance().player.getX(),
+              Minecraft.getInstance().player.getY(),
+              Minecraft.getInstance().player.getZ())
+                  > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
+              Minecraft.getInstance().options.renderDistance().get() * 16))
+            {
+                cir.setReturnValue(true);
+            }
         }
     }
 
-    private double distSqr(float fromX, float fromY, float fromZ, float toX, float toY, float toZ)
+    @Unique
+    private static double distSqr(float fromX, float fromY, float fromZ, double toX, double toY, double toZ)
     {
         double d0 = fromX - toX;
         double d1 = fromY - toY;
