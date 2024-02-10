@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(OcclusionCuller.class)
 public class Sodiummixin
 {
-    @Inject(method = "isOutsideRenderDistance", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    private static void isWithinRenderDistance(
+    @Inject(method = "isWithinRenderDistance", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    private static void betterfps$renderdistance(
       final CameraTransform camera,
       final RenderSection section,
       final float maxDistance, final CallbackInfoReturnable<Boolean> cir)
