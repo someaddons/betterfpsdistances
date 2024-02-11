@@ -3,15 +3,12 @@ package com.betterfpsdist.mixin;
 import com.betterfpsdist.BetterfpsdistMod;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager;
-import me.jellysquid.mods.sodium.client.render.chunk.graph.ChunkGraphIterationQueue;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.Direction;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(RenderSectionManager.class)
 public class Sodiummixin
@@ -25,22 +22,13 @@ public class Sodiummixin
     @Shadow(remap = false)
     private float cameraZ;
 
-    @Shadow(remap = false)
-    @Final
-    private ChunkGraphIterationQueue iterationQueue;
-
-    @Inject(method = "addVisible", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    private void isWithinRenderDistance(
-      final RenderSection render,
-      final Direction flow,
-      final CallbackInfo ci)
+    @Inject(method = "isWithinRenderDistance", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    private void isWithinRenderDistance(final RenderSection render, final CallbackInfoReturnable<Boolean> cir)
     {
-        iterationQueue.add(render, flow);
-        if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ)
-              > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
+        if (distSqr(render.getOriginX(), render.getOriginY(), render.getOriginZ(), cameraX, cameraY, cameraZ) > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
           Minecraft.getInstance().options.renderDistance().get() * 16))
         {
-            ci.cancel();
+            cir.setReturnValue(false);
         }
     }
 
