@@ -31,7 +31,7 @@ public class Sodiummixin
                   > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
               Minecraft.getInstance().options.renderDistance().get() * 16))
             {
-                cir.setReturnValue(true);
+                cir.setReturnValue(false);
             }
         }
     }
