@@ -1,4 +1,7 @@
 {
-  "options.verticalstretch": "Vertical render dist scale",
-  "options.horizontalstretch": "Horizontal render dist scale"
+  "options.verticalstretch": "Vertical stretch",
+  "options.horizontalstretch": "Horizontal stretch",
+  "options.verticalstretch.tooltip": "Controls how far above/below you can see chunksections. 100% Is a full circle, the higher the setting the more chunk sections on the corners skip rendering thus improving performance",
+  "options.horizontalstretch.tooltip": "Controls how far in the left/right corners you can see chunksections. 0% Is a full circle(vanilla), the higher the setting the more chunk sections on the corners skip rendering thus improving performance",
+  "options.button.sodium": "Sodium Video Settings"
 }

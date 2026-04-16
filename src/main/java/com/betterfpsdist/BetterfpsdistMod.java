@@ -1,13 +1,10 @@
 package com.betterfpsdist;
 
-import com.betterfpsdist.compat.EmbeddiumCompat;
 import com.betterfpsdist.config.CommonConfiguration;
 import com.cupboard.config.CupboardConfig;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,9 +21,6 @@ public class BetterfpsdistMod
 
     public BetterfpsdistMod(IEventBus modEventBus, ModContainer modContainer)
     {
-        if (FMLLoader.getLoadingModList().getModFileById("embeddium") != null && FMLLoader.getDist() == Dist.CLIENT)
-        {
-            EmbeddiumCompat.initCompat();
-        }
+
     }
 }

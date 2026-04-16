@@ -26,14 +26,20 @@ public class MixinConfig implements IMixinConfigPlugin
     @Override
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName)
     {
-        if (FMLLoader.getLoadingModList().getModFileById("magnesium") != null ||
-              FMLLoader.getLoadingModList().getModFileById("sodium") != null ||
-              FMLLoader.getLoadingModList().getModFileById("rubidium") != null ||
-              FMLLoader.getLoadingModList().getModFileById("embeddium") != null)
+        if (FMLLoader.getCurrent().getLoadingModList().getModFileById("magnesium") != null ||
+            FMLLoader.getCurrent().getLoadingModList().getModFileById("sodium") != null ||
+            FMLLoader.getCurrent().getLoadingModList().getModFileById("rubidium") != null ||
+            FMLLoader.getCurrent().getLoadingModList().getModFileById("embeddium") != null)
         {
-            if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin") || mixinClassName.contains("VideoSettingsScreen"))
+            if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin"))
             {
                 return false;
+            }
+
+            if (mixinClassName.equals("com.betterfpsdist.mixin.VideoSettingsScreenSodiumMixin")
+                || mixinClassName.equals("com.betterfpsdist.mixin.SodiumMixin"))
+            {
+                return true;
             }
         }
 
