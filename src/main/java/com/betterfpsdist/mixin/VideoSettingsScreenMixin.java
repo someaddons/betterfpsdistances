@@ -14,13 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(VideoSettingsScreen.class)
 public abstract class VideoSettingsScreenMixin extends OptionsSubScreen
 {
-
     public VideoSettingsScreenMixin(final Screen screen, final Options options, final Component component)
     {
         super(screen, options, component);
     }
 
-    @Inject(method = "addOptions", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/OptionsList;addSmall([Lnet/minecraft/client/OptionInstance;)V"))
+    @Inject(method = "addOptions", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/OptionsList;addHeader(Lnet/minecraft/network/chat/Component;)V", ordinal = 2))
     public void on(final CallbackInfo ci)
     {
         list.addSmall(ClientEventHandler.chunkrenderdist, ClientEventHandler.chunkrenderdistxz);

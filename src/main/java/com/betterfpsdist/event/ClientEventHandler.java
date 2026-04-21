@@ -14,28 +14,28 @@ public class ClientEventHandler
 {
     public static final OptionInstance<Double> chunkrenderdist =
       new OptionInstance<>("options.verticalstretch",
-        OptionInstance.noTooltip(),
+          OptionInstance.cachedConstantTooltip(Component.translatable("options.verticalstretch.tooltip")),
         ClientEventHandler::percentValueLabel,
         (new OptionInstance.IntRange(2, 40)).xmap((value) ->
         {
             return (double) value / 4.0D;
         }, (value) -> {
             return (int) (value * 4.0D);
-        }), Codec.doubleRange(0.5D, 5.0D), 1.0D, (value) -> {
+        }, false), Codec.doubleRange(0.5D, 5.0D), 1.0D, (value) -> {
           BetterfpsdistMod.config.getCommonConfig().verticalScaling = (double) value;
           BetterfpsdistMod.config.save();
       });
 
     public static final OptionInstance<Double> chunkrenderdistxz =
       new OptionInstance<>("options.horizontalstretch",
-        OptionInstance.noTooltip(),
+          OptionInstance.cachedConstantTooltip(Component.translatable("options.horizontalstretch.tooltip")),
         ClientEventHandler::percentValueLabel,
         (new OptionInstance.IntRange(0, 100)).xmap((value) ->
         {
             return (double) value / 100.0D;
         }, (value) -> {
             return (int) (value  * 100.0D);
-        }), Codec.doubleRange(0D, 100D), 1.0D, (value) -> {
+        }, false), Codec.doubleRange(0D, 100D), 1.0D, (value) -> {
           BetterfpsdistMod.config.getCommonConfig().horizontalScaling = (double) 1.0 + value;
           BetterfpsdistMod.config.save();
       });
@@ -67,14 +67,13 @@ public class ClientEventHandler
 
         maxSqDist = (Minecraft.getInstance().options.renderDistance().get() * 16) * (Minecraft.getInstance().options.renderDistance().get() * 16) + 1;
 
-        if (BetterfpsdistMod.config.getCommonConfig().debugMode && Minecraft.getInstance().player.level().getGameTime() > nextUpdate)
+        if (BetterfpsdistMod.config.getCommonConfig().debugMode && Minecraft.getInstance().player.level().getGameTime() > nextUpdate && hiddenSections.size() > 0)
         {
             nextUpdate = Minecraft.getInstance().player.level().getGameTime() + 20 * 2;
             BetterfpsdistMod.LOGGER.warn("Hidden Sections:" + hiddenSections.size());
-            Minecraft.getInstance().player.displayClientMessage(Component.literal("Hidden chunk sections:" + hiddenSections.size()), true);
+            Minecraft.getInstance().player.sendSystemMessage(Component.literal("Hidden chunk sections:" + hiddenSections.size()));
+            hiddenSections.clear();
         }
-
-        hiddenSections.clear();
     }
 
     public static float xStretch = 1;

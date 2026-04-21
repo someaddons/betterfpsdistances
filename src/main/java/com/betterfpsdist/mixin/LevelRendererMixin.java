@@ -3,47 +3,39 @@ package com.betterfpsdist.mixin;
 import com.betterfpsdist.BetterfpsdistMod;
 import com.betterfpsdist.event.ClientEventHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SectionOcclusionGraph;
 import net.minecraft.client.renderer.chunk.SectionRenderDispatcher;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.client.renderer.culling.Frustum;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(LevelRenderer.class)
+import java.util.List;
+
+@Mixin(SectionOcclusionGraph.class)
 public class LevelRendererMixin
 {
-    @Shadow
-    @Final
-    private Minecraft                             minecraft;
-    private SectionRenderDispatcher.RenderSection current = null;
-
-    @Redirect(method = "renderSectionLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$RenderSection;getCompiled()Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$CompiledSection;"))
-    public SectionRenderDispatcher.CompiledSection on(final SectionRenderDispatcher.RenderSection instance)
+    @Inject(method = "addSectionsInFrustum", at = @At(value = "RETURN"))
+    public void on(
+        final Frustum frustum,
+        final List<SectionRenderDispatcher.RenderSection> visibleSections,
+        final List<SectionRenderDispatcher.RenderSection> nearbyVisibleSection,
+        final CallbackInfo ci)
     {
-        current = instance;
-        return instance.getCompiled();
-    }
-
-    @Redirect(method = "renderSectionLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$CompiledSection;isEmpty(Lnet/minecraft/client/renderer/RenderType;)Z"))
-    public boolean on(final SectionRenderDispatcher.CompiledSection instance, final RenderType type)
-    {
-        if (instance.isEmpty(type))
-        {
-            return true;
-        }
-
-        if (minecraft.cameraEntity != null && ClientEventHandler.adjustedDistance(minecraft.cameraEntity.blockPosition(), current.getOrigin()) > ClientEventHandler.maxSqDist)
-        {
-            if (BetterfpsdistMod.config.getCommonConfig().debugMode)
+        visibleSections.removeIf(renderSection -> {
+            final Minecraft minecraft = Minecraft.getInstance();
+            if (minecraft.getCameraEntity() != null
+                && ClientEventHandler.adjustedDistance(minecraft.getCameraEntity().blockPosition(), renderSection.getRenderOrigin()) > ClientEventHandler.maxSqDist)
             {
-                ClientEventHandler.hiddenSections.add(current.getOrigin());
-            }
-            return true;
-        }
+                if (BetterfpsdistMod.config.getCommonConfig().debugMode)
+                {
+                    ClientEventHandler.hiddenSections.add(renderSection.getRenderOrigin());
+                }
 
-        return false;
+                return true;
+            }
+            return false;
+        });
     }
 }

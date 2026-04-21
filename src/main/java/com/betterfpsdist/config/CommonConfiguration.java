@@ -6,10 +6,11 @@ import com.google.gson.JsonObject;
 
 public class CommonConfiguration implements ICommonConfig
 {
-    public double verticalScaling   = 2.0;
-    public double horizontalScaling = 1.1;
+    public double  verticalScaling   = 2.0;
+    public double  horizontalScaling = 1.1;
     public boolean debugMode         = false;
-    public boolean affectEntities = true;
+    public boolean affectEntities    = true;
+    public boolean repositionSodiumOptions = true;
 
     public JsonObject serialize()
     {
@@ -39,6 +40,13 @@ public class CommonConfiguration implements ICommonConfig
         entry3.addProperty("debugMode", debugMode);
         root.add("debugMode", entry3);
 
+        final JsonObject entry5 = new JsonObject();
+        entry5.addProperty("desc:",
+            "Repositions the sodium video settings to a sub button of the original video settings. Disabling this also hides the horizontal/vertical stretch options in the original screen."
+                + " default:true");
+        entry5.addProperty("repositionSodiumOptions", repositionSodiumOptions);
+        root.add("repositionSodiumOptions", entry5);
+
         return root;
     }
 
@@ -54,5 +62,6 @@ public class CommonConfiguration implements ICommonConfig
         horizontalScaling = data.get("horizontalScaling").getAsJsonObject().get("horizontalScaling").getAsDouble();
         debugMode = data.get("debugMode").getAsJsonObject().get("debugMode").getAsBoolean();
         affectEntities = data.get("affectEntities").getAsJsonObject().get("affectEntities").getAsBoolean();
+        repositionSodiumOptions = data.get("repositionSodiumOptions").getAsJsonObject().get("repositionSodiumOptions").getAsBoolean();
     }
 }

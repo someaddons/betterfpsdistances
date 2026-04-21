@@ -6,11 +6,12 @@
   "mixins": [
   ],
   "client": [
-    "LevelRendererMixin",
-    "VideoSettingsScreenMixin",
     "EntityRenderDistMixin",
+    "LevelRendererMixin",
+    "OptionsScreenMixin",
     "Sodiummixin",
-    "SodiumGameOptionPagesMixin"
+    "VideoSettingsScreenMixin",
+    "VideoSettingsScreenSodiumMixin"
   ],
   "injectors": {
     "defaultRequire": 1

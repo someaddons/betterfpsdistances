@@ -29,9 +29,15 @@ public class MixinConfig implements IMixinConfigPlugin
         if (FabricLoader.getInstance().isModLoaded("magnesium") ||
               FabricLoader.getInstance().isModLoaded("sodium"))
         {
-            if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin") || mixinClassName.contains("VideoSettingsScreen"))
+            if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin"))
             {
                 return false;
+            }
+
+            if (mixinClassName.equals("com.betterfpsdist.mixin.VideoSettingsScreenSodiumMixin")
+                || mixinClassName.equals("com.betterfpsdist.mixin.SodiumMixin"))
+            {
+                return true;
             }
         }
 
