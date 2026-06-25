@@ -9,12 +9,13 @@
   "client": [
     "EntityRenderDistMixin",
     "LevelRendererMixin",
-    "SodiumGameOptionPagesMixin",
+    "OptionsScreenMixin",
     "Sodiummixin",
-    "VideoSettingsScreenMixin"
+    "VideoSettingsScreenMixin",
+    "VideoSettingsScreenSodiumMixin"
   ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 0
   },
   "minVersion": "0.8"
 }

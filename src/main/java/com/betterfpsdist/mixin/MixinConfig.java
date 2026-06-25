@@ -27,14 +27,26 @@ public class MixinConfig implements IMixinConfigPlugin
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName)
     {
         if (FMLLoader.getLoadingModList().getModFileById("magnesium") != null ||
-              FMLLoader.getLoadingModList().getModFileById("sodium") != null ||
-              FMLLoader.getLoadingModList().getModFileById("rubidium") != null ||
-              FMLLoader.getLoadingModList().getModFileById("embeddium") != null)
+            FMLLoader.getLoadingModList().getModFileById("sodium") != null ||
+            FMLLoader.getLoadingModList().getModFileById("rubidium") != null ||
+            FMLLoader.getLoadingModList().getModFileById("embeddium") != null)
         {
-            if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin") || mixinClassName.contains("VideoSettingsScreen"))
+            if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin"))
             {
                 return false;
             }
+
+            if (FMLLoader.getLoadingModList().getModFileById("embeddium") == null && (mixinClassName.equals("com.betterfpsdist.mixin.VideoSettingsScreenSodiumMixin")
+                || mixinClassName.equals("com.betterfpsdist.mixin.SodiumMixin")))
+            {
+                return true;
+            }
+        }
+
+        if (mixinClassName.equals("com.betterfpsdist.mixin.VideoSettingsScreenSodiumMixin")
+            || mixinClassName.equals("com.betterfpsdist.mixin.SodiumMixin"))
+        {
+            return false;
         }
 
         if (mixinClassName.contains("EntityRenderDistMixin"))
