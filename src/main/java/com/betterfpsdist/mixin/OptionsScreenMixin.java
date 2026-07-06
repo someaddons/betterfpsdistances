@@ -33,7 +33,7 @@ public class OptionsScreenMixin
         if (message == VIDEO)
         {
             cir.setReturnValue(Button.builder(message,
-                (button) -> Minecraft.getInstance().setScreen(new VideoSettingsScreen((OptionsScreen) (Object) this, Minecraft.getInstance(), options))).build());
+                (button) -> Minecraft.getInstance().gui.setScreen(new VideoSettingsScreen((OptionsScreen) (Object) this, Minecraft.getInstance(), options))).build());
         }
     }
 }

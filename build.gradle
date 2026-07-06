@@ -24,7 +24,7 @@ tasks.named('wrapper', Wrapper).configure {
 }
 
 def versionParts = project.mc_version.tokenize('.')
-def cleanVersion = versionParts.size() > 2 ? versionParts[0..-2].join('.') : project.minecraft_version
+def cleanVersion = versionParts.size() > 2 ? versionParts[0..-2].join('.') : project.mc_version
 version = cleanVersion + "-${mod_version}"
 group = "com.${modid}"
 
@@ -122,8 +122,8 @@ configurations {
 
 dependencies {
     implementation "curse.maven:cupboard-326652:7904113"
-    compileOnly "net.caffeinemc.mods:sodium-neoforge-0.8.9+mc26.1.1-mod"
-    implementation "curse.maven:sodium-394468:7867828"
+    compileOnly "net.caffeinemc.mods:net.caffeinemc.sodium-neoforge-0.9.1-beta.4+mc26.2-mod"
+    runtimeOnly "curse.maven:sodium-394468:8378326"
 }
 
 def loaderVersionRange = providers.gradleProperty("loader_version_range")
