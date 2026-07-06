@@ -22,7 +22,7 @@ public abstract class VideoSettingsScreenSodiumMixin extends OptionsSubScreen
     protected void addFooter()
     {
         this.layout.addToFooter(Button.builder(Component.translatable("options.button.sodium"),
-                    (button) -> Minecraft.getInstance().setScreen(net.caffeinemc.mods.sodium.client.gui.VideoSettingsScreen.createScreen(this.lastScreen)))
+                    (button) -> Minecraft.getInstance().gui.setScreen(net.caffeinemc.mods.sodium.client.gui.VideoSettingsScreen.createScreen(this.lastScreen)))
                 .width(layout.getWidth() / 3)
                 .build(),
             s -> s.alignHorizontally(0.8f));
