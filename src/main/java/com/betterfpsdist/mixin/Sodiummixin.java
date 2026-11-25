@@ -34,7 +34,7 @@ public class Sodiummixin
         this.section = section;
     }
 
-    @WrapOperation(method = "visitNode", at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/occlusion/OcclusionCuller;testDistance(FFF)Z"), remap = false)
+    @WrapOperation(method = "visitNode", at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/occlusion/OcclusionCuller;isWithinCylinderDistance(FFF)Z"), remap = false)
     private boolean betterfps$renderdistance(
         final float xzThreshold, final float yThreshold, final float maxDistance, final Operation<Boolean> original)
     {

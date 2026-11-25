@@ -122,7 +122,7 @@ configurations {
 
 dependencies {
     implementation "curse.maven:cupboard-326652:7904113"
-    compileOnly "net.caffeinemc.mods:net.caffeinemc.sodium-neoforge-0.9.1-beta.4+mc26.2-mod"
+    compileOnly "net.caffeinemc.mods:net.caffeinemc.sodium-neoforge-0.9.4-beta.1+mc26.2-mod"
     runtimeOnly "curse.maven:sodium-394468:8378326"
 }
 
@@ -198,3 +198,16 @@ tasks.register("validateJson") {
 }
 
 processResources.dependsOn validateJson
+
+def uploaderHome = System.getenv('CFUPLOAD_HOME') ?:
+        new File(System.getProperty('user.home'), '.cfupload').path
+def uploaderScript = new File(uploaderHome, 'gradle.gradle')
+if (uploaderScript.isFile()) {
+    apply from: uploaderScript
+}
+
+curseForgeUploader.putAll([
+        minecraftVersions: ['26.2', '26.3'],
+        loaders          : ['NeoForge'],
+        client           : true
+])
